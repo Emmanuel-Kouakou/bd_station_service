@@ -1,0 +1,47 @@
+REMBOURSEMENT_DIRECTION:id_rb_direction,montant_rembourse,Date
+LIER_DIR, 1N CREDIT_DIRECTION, 11 REMBOURSEMENT_DIRECTION
+CLIENT:id_client,nom_client,prenom_client,adresse_client,telephone_client
+PEUT_PRENDRE, 1N CLIENT, 11 CREDIT_GERANT
+LIER_GER, 1N CREDIT_GERANT, 11 REMBOURSEMENT_GERANT
+REMBOURSEMENT_GERANT:id_rb_gerant,montant_verse,Date
+ACCORDER_DIRECTION, 1N DIRECTION, 11 CREDIT_DIRECTION
+
+CREDIT_DIRECTION:id_cred_dir,montant_credit,date_credit,echeance,statut
+PRENDRE, 1N CLIENT, 11 CREDIT_DIRECTION
+CREDIT_GERANT:id_cred_ger,montant_credit,date_credit,echeance,statut
+ACCORDER_GERANT, 1N GERANT, 11 CREDIT_GERANT
+EFFECTUER_PAR, 1N GERANT, 11 VERSEMENT
+VERSEMENT:id_versement,date,montant_verse
+DIRECTION:id_direction,libelle_direction,adresse_direction,telephone_direction,login,mot_de_passe
+
+CONCERNE, 1N PRODUIT, 11 CREDIT_DIRECTION
+PRODUIT:id_produit,nom,reference,prix
+CONCERNER, 1N PRODUIT, 11 CREDIT_GERANT
+PASSER, 1N GERANT, 11 COMMANDE
+GERANT:id_gerant,prenom_gerant,adresse_gerant,telephone_gerant,mail_gerant,login,mot_de_passe
+RECEVOIR, 11 VERSEMENT, 1N BANQUE
+CONTENIR, 11 CUVE, 1N PRODUIT
+
+COMMANDER, 11 COMMANDE, 1N PRODUIT
+COMMANDE:id_cmd,numero_cmd,quantite_cmd,date
+GERER, 1N GERANT, 11 STATION
+BANQUE:id_banque,libelle
+POMPE:id_pompe,libelle,status
+ALIMENTER, 1N CUVE, 11 POMPE
+CUVE:id_cuve,capacite,statut
+
+AVOIR, 1N STATION, 11 CUVE
+STATION:id_station,nom_station,adresse_station,telephone_station,type_payement,statusbis_station,objectif,besoin,status
+ADMETTRE, 1N STATION, 11 POMPISTE
+POMPISTE:id_pompiste,prenom_pompiste,nom_pompiste,adresse_pompiste,telephone_pompiste,login,statut
+LIVRAISON:id_livr,numero_livr,quantite_livre,date_livr
+CAMION:id_camion,libelle
+CHAUFFEUR:id_chauffeur,nom,adresse
+
+livrer, 1N PRODUIT, 11 LIVRAISON
+PEUT_EFFECTUER, 1N DIRECTION, 11 LIVRAISON
+EFFECTUE, 1N CHAUFFEUR, 11 LIVRAISON
+PERMET_EFFECTUER, 1N CAMION, 11 LIVRAISON
+VENTE:id_vente,TPE,espece
+EFFECTUE_VENTE, 1N GERANT, 11 VENTE
+:

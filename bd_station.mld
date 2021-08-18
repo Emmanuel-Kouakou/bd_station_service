@@ -1,0 +1,55 @@
+%%mocodo
+:
+REMBOURSEMENT_DIRECTION: id_rb_direction, montant_rembourse, Date, #id_cred_dir->CREDIT_DIRECTION->id_cred_dir
+:::
+CLIENT: id_client, nom_client, prenom_client, adresse_client, telephone_client
+:::::
+REMBOURSEMENT_GERANT: id_rb_gerant, montant_verse, Date, #id_cred_ger->CREDIT_GERANT->id_cred_ger
+:::
+
+
+:
+CREDIT_DIRECTION: id_cred_dir, montant_credit, date_credit, echeance, statut, #id_client->CLIENT->id_client, #id_produit->PRODUIT->id_produit, #id_direction->DIRECTION->id_direction
+:::
+CREDIT_GERANT: id_cred_ger, montant_credit, date_credit, echeance, statut, #id_produit->PRODUIT->id_produit, #id_client->CLIENT->id_client, #id_gerant->GERANT->id_gerant
+:::::
+VERSEMENT: id_versement, date, montant_verse, #id_gerant->GERANT->id_gerant, #id_banque->BANQUE->id_banque
+:
+DIRECTION: id_direction, libelle_direction, adresse_direction, telephone_direction, login, mot_de_passe
+:
+
+
+:::
+PRODUIT: id_produit, nom, reference, prix
+:::::
+GERANT: id_gerant, prenom_gerant, adresse_gerant, telephone_gerant, mail_gerant, login, mot_de_passe
+:::::
+
+
+:::
+COMMANDE: id_cmd, numero_cmd, quantite_cmd, date, #id_gerant->GERANT->id_gerant, #id_produit->PRODUIT->id_produit
+:::
+BANQUE: id_banque, libelle
+:
+POMPE: id_pompe, libelle, status, #id_cuve->CUVE->id_cuve
+:::
+CUVE: id_cuve, capacite, statut, #id_produit->PRODUIT->id_produit, #id_station->STATION->id_station
+:
+
+
+:::
+STATION: id_station, nom_station, adresse_station, telephone_station, type_payement, statusbis_station, objectif, besoin, status, #id_gerant->GERANT->id_gerant
+:::
+POMPISTE: id_pompiste, prenom_pompiste, nom_pompiste, adresse_pompiste, telephone_pompiste, login, statut, #id_station->STATION->id_station
+:
+LIVRAISON: id_livr, numero_livr, quantite_livre, date_livr, #id_chauffeur->CHAUFFEUR->id_chauffeur, #id_produit->PRODUIT->id_produit, #id_direction->DIRECTION->id_direction, #id_camion->CAMION->id_camion
+:
+CAMION: id_camion, libelle
+:
+CHAUFFEUR: id_chauffeur, nom, adresse
+:
+
+
+:::::::::
+VENTE: id_vente, TPE, espece, #id_gerant->GERANT->id_gerant
+:::::

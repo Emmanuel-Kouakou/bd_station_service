@@ -1,0 +1,194 @@
+<html>
+<head>
+<meta charset='utf-8'>
+<style>
+  #mld .relation { font-variant: small-caps; font-weight: bold }
+  #mld .primary { text-decoration: underline }
+  #mld .foreign { font-style: oblique }
+  #mld .normal { }
+</style>
+</head>
+<body>
+<div id='mld'>
+<div>
+  <span class='relation'>REMBOURSEMENT_DIRECTION</span> (
+    <span class='primary'>id_rb_direction</span>,
+    <span class='normal'>montant_rembourse</span>,
+    <span class='normal'>Date</span>,
+    <span class='foreign'>id_cred_dir</span>
+  )
+</div>
+<div>
+  <span class='relation'>CLIENT</span> (
+    <span class='primary'>id_client</span>,
+    <span class='normal'>nom_client</span>,
+    <span class='normal'>prenom_client</span>,
+    <span class='normal'>adresse_client</span>,
+    <span class='normal'>telephone_client</span>
+  )
+</div>
+<div>
+  <span class='relation'>REMBOURSEMENT_GERANT</span> (
+    <span class='primary'>id_rb_gerant</span>,
+    <span class='normal'>montant_verse</span>,
+    <span class='normal'>Date</span>,
+    <span class='foreign'>id_cred_ger</span>
+  )
+</div>
+<div>
+  <span class='relation'>CREDIT_DIRECTION</span> (
+    <span class='primary'>id_cred_dir</span>,
+    <span class='normal'>montant_credit</span>,
+    <span class='normal'>date_credit</span>,
+    <span class='normal'>echeance</span>,
+    <span class='normal'>statut</span>,
+    <span class='foreign'>id_client</span>,
+    <span class='foreign'>id_produit</span>,
+    <span class='foreign'>id_direction</span>
+  )
+</div>
+<div>
+  <span class='relation'>CREDIT_GERANT</span> (
+    <span class='primary'>id_cred_ger</span>,
+    <span class='normal'>montant_credit</span>,
+    <span class='normal'>date_credit</span>,
+    <span class='normal'>echeance</span>,
+    <span class='normal'>statut</span>,
+    <span class='foreign'>id_produit</span>,
+    <span class='foreign'>id_client</span>,
+    <span class='foreign'>id_gerant</span>
+  )
+</div>
+<div>
+  <span class='relation'>VERSEMENT</span> (
+    <span class='primary'>id_versement</span>,
+    <span class='normal'>date</span>,
+    <span class='normal'>montant_verse</span>,
+    <span class='foreign'>id_gerant</span>,
+    <span class='foreign'>id_banque</span>
+  )
+</div>
+<div>
+  <span class='relation'>DIRECTION</span> (
+    <span class='primary'>id_direction</span>,
+    <span class='normal'>libelle_direction</span>,
+    <span class='normal'>adresse_direction</span>,
+    <span class='normal'>telephone_direction</span>,
+    <span class='normal'>login</span>,
+    <span class='normal'>mot_de_passe</span>
+  )
+</div>
+<div>
+  <span class='relation'>PRODUIT</span> (
+    <span class='primary'>id_produit</span>,
+    <span class='normal'>nom</span>,
+    <span class='normal'>reference</span>,
+    <span class='normal'>prix</span>
+  )
+</div>
+<div>
+  <span class='relation'>GERANT</span> (
+    <span class='primary'>id_gerant</span>,
+    <span class='normal'>prenom_gerant</span>,
+    <span class='normal'>adresse_gerant</span>,
+    <span class='normal'>telephone_gerant</span>,
+    <span class='normal'>mail_gerant</span>,
+    <span class='normal'>login</span>,
+    <span class='normal'>mot_de_passe</span>
+  )
+</div>
+<div>
+  <span class='relation'>COMMANDE</span> (
+    <span class='primary'>id_cmd</span>,
+    <span class='normal'>numero_cmd</span>,
+    <span class='normal'>quantite_cmd</span>,
+    <span class='normal'>date</span>,
+    <span class='foreign'>id_gerant</span>,
+    <span class='foreign'>id_produit</span>
+  )
+</div>
+<div>
+  <span class='relation'>BANQUE</span> (
+    <span class='primary'>id_banque</span>,
+    <span class='normal'>libelle</span>
+  )
+</div>
+<div>
+  <span class='relation'>POMPE</span> (
+    <span class='primary'>id_pompe</span>,
+    <span class='normal'>libelle</span>,
+    <span class='normal'>status</span>,
+    <span class='foreign'>id_cuve</span>
+  )
+</div>
+<div>
+  <span class='relation'>CUVE</span> (
+    <span class='primary'>id_cuve</span>,
+    <span class='normal'>capacite</span>,
+    <span class='normal'>statut</span>,
+    <span class='foreign'>id_produit</span>,
+    <span class='foreign'>id_station</span>
+  )
+</div>
+<div>
+  <span class='relation'>STATION</span> (
+    <span class='primary'>id_station</span>,
+    <span class='normal'>nom_station</span>,
+    <span class='normal'>adresse_station</span>,
+    <span class='normal'>telephone_station</span>,
+    <span class='normal'>type_payement</span>,
+    <span class='normal'>statusbis_station</span>,
+    <span class='normal'>objectif</span>,
+    <span class='normal'>besoin</span>,
+    <span class='normal'>status</span>,
+    <span class='foreign'>id_gerant</span>
+  )
+</div>
+<div>
+  <span class='relation'>POMPISTE</span> (
+    <span class='primary'>id_pompiste</span>,
+    <span class='normal'>prenom_pompiste</span>,
+    <span class='normal'>nom_pompiste</span>,
+    <span class='normal'>adresse_pompiste</span>,
+    <span class='normal'>telephone_pompiste</span>,
+    <span class='normal'>login</span>,
+    <span class='normal'>statut</span>,
+    <span class='foreign'>id_station</span>
+  )
+</div>
+<div>
+  <span class='relation'>LIVRAISON</span> (
+    <span class='primary'>id_livr</span>,
+    <span class='normal'>numero_livr</span>,
+    <span class='normal'>quantite_livre</span>,
+    <span class='normal'>date_livr</span>,
+    <span class='foreign'>id_chauffeur</span>,
+    <span class='foreign'>id_produit</span>,
+    <span class='foreign'>id_direction</span>,
+    <span class='foreign'>id_camion</span>
+  )
+</div>
+<div>
+  <span class='relation'>CAMION</span> (
+    <span class='primary'>id_camion</span>,
+    <span class='normal'>libelle</span>
+  )
+</div>
+<div>
+  <span class='relation'>CHAUFFEUR</span> (
+    <span class='primary'>id_chauffeur</span>,
+    <span class='normal'>nom</span>,
+    <span class='normal'>adresse</span>
+  )
+</div>
+<div>
+  <span class='relation'>VENTE</span> (
+    <span class='primary'>id_vente</span>,
+    <span class='normal'>TPE</span>,
+    <span class='normal'>espece</span>,
+    <span class='foreign'>id_gerant</span>
+  )
+</div>
+</div>
+</body>
+</html>
